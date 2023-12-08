@@ -43,6 +43,40 @@ paths:
         '200':
           description: Successful operation
           content: {}
+  
+  /contrato:
+    get:
+      summary: Retrieve all contrato
+      responses:
+        '200':
+          description: Successful operation
+          content: {}
+    post:
+      summary: Create a new contrato
+      responses:
+        '200':
+          description: Successful operation
+          content: {}
+  /contrato/{id}:
+    get:
+      summary: Retrieve a contrato by ID
+      responses:
+        '200':
+          description: Successful operation
+          content: {}
+    put:
+      summary: Update a contrato by ID
+      responses:
+        '200':
+          description: Successful operation
+          content: {}
+    delete:
+      summary: Delete a contrato by ID
+      responses:
+        '200':
+          description: Successful operation
+          content: {}
+
   /examples:
     get:
       tags:
