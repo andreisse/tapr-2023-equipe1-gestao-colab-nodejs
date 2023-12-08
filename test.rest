@@ -1,9 +1,21 @@
-POST http://localhost:3000/api/v1/gestaocolab Content-Type: application/json
+###gravar no db
+# POST http://localhost:3000/api/v1/gestaocolab
+
+# {
+#     "id": "prof",
+#     "nome": "andreisse",
+#     "sobrenome": "leandro",
+#     "cpf": 0090909890,
+#     "cargo": "professor"
+# }
+
+
+POST http://localhost:3000/api/v1/contrato
 
 {
-    "id": "prof",
-    "nome": "andreisse",
-    "sobrenome": "leandro",
-    "cpf": 0090909890,
-    "cargo": "professor"
+    "id": "nseisevai",
+    "nome": "walter",
+    "disciplina": "engsoft"
 }
+
+
