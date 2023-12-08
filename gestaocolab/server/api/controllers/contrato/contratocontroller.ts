@@ -1,7 +1,15 @@
 import {Request, Response} from 'express';
 import ContratoService from '../../services/contrato.service';
+import { Gestaocolab } from 'server/api/entites/gestaocolab';
+import daprClient from 'server/common/daprcliente';
 
 class ContratoController{
+
+    async publishEvent(carro:Gestaocolab): Promise<Gestaocolab>{
+        daprClient.pubsub.publish(process.env.APPCOMPONENTSERVICE as string,process.env.APPCOMPONENTTOPICGESTAOCOLAB as string,carro);
+        return Promise.resolve(carro);
+
+    }
     all(_:Request, res:Response): void{
         ContratoService.all().then((r) => res.json(r));
     }

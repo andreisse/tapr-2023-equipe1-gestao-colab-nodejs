@@ -1,14 +1,14 @@
 import { Container, SqlQuerySpec } from "@azure/cosmos";
 import cosmosDb from "../../common/cosmosdb";
 import { Gestaocolab } from "../entites/gestaocolab";
-// import daprClient from "../../common/daprclient";
+import daprClient from "server/common/daprcliente";
 
 class GestaocolabService {
     private container: Container =
         cosmosDb.container("gestaocolab");
 
     async publishEvent(gestaocolab: Gestaocolab): Promise<Gestaocolab> {
-        // daprClient.pubsub.publish(process.env.APPCOMPONENTSERVICE as string, process.env.APPCOMPONENTTOPICGESTAOCOLAB as string, gestaocolab);
+        daprClient.pubsub.publish(process.env.APPCOMPONENTSERVICE as string, process.env.APPCOMPONENTTOPICGESTAOCOLAB as string, gestaocolab);
         return Promise.resolve(gestaocolab);
     }
 
