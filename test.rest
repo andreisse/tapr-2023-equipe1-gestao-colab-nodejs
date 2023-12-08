@@ -1,0 +1,9 @@
+POST http://localhost:3000/api/v1/gestaocolab Content-Type: application/json
+
+{
+    "id": "prof",
+    "nome": "andreisse",
+    "sobrenome": "leandro",
+    "cpf": 0090909890,
+    "cargo": "professor"
+}

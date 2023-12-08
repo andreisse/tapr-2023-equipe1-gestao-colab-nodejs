@@ -1,32 +1,14 @@
-// import { Container } from "@azure/cosmos";
-// import cosmosDb from "../../common/cosmosdb";
-// import { Gestaocolab } from "../entites/gestaocolab";
-
-// class GestaocolabService{
-//     private container:Container =
-//         cosmosDb.container("gestaocolab");
-
-//     async all(): Promise<Gestaocolab[]>{
-//         const {resources: listaColab}
-//              = await this.container.items.readAll<Gestaocolab>().fetchAll();
-//              console.log(listaColab)
-//         return Promise.resolve(listaColab);
-//     }
-// }
-
-// export default new GestaocolabService();
-
 import { Container, SqlQuerySpec } from "@azure/cosmos";
 import cosmosDb from "../../common/cosmosdb";
 import { Gestaocolab } from "../entites/gestaocolab";
-import daprClient from "../../common/daprclient";
+// import daprClient from "../../common/daprclient";
 
 class GestaocolabService {
     private container: Container =
         cosmosDb.container("gestaocolab");
 
     async publishEvent(gestaocolab: Gestaocolab): Promise<Gestaocolab> {
-        daprClient.pubsub.publish(process.env.APPCOMPONENTSERVICE as string, process.env.APPCOMPONENTTOPICGESTAOCOLAB as string, gestaocolab);
+        // daprClient.pubsub.publish(process.env.APPCOMPONENTSERVICE as string, process.env.APPCOMPONENTTOPICGESTAOCOLAB as string, gestaocolab);
         return Promise.resolve(gestaocolab);
     }
 
@@ -63,16 +45,19 @@ class GestaocolabService {
         };
         const { resources: listaGestaocolab }
             = await this.container.items.query(querySpec).fetchAll();
-        const nomeAluno = listaGestaocolab[0];
-        if (gestaocolab == undefined) {
-            return Promise.reject();
+    
+        if (listaGestaocolab.length === 0) {
+            return Promise.reject("Gestaocolab não encontrado");
         }
-        //Atualizar os campos
-        gestaocolab.nome = gestaocolab.nome;
-
-        await this.container.items.upsert(gestaocolab.nome)
-
-        return Promise.resolve(nomeAluno);
+    
+        const Nomegestaocolab = listaGestaocolab[0];
+    
+        // Atualizar os campos
+        Nomegestaocolab.nome = gestaocolab.nome;
+    
+        await this.container.items.upsert(Nomegestaocolab);
+    
+        return Promise.resolve(Nomegestaocolab);
     }
     async delete(id: string): Promise<string> {
 
@@ -84,8 +69,8 @@ class GestaocolabService {
         };
         const { resources: listaGestaocolab }
             = await this.container.items.query(querySpec).fetchAll();
-        for (const aluno of listaGestaocolab) {
-            await this.container.item(aluno.id).delete();
+        for (const gestaocolab of listaGestaocolab) {
+            await this.container.item(gestaocolab.id).delete();
         }
 
         return Promise.resolve(id);
