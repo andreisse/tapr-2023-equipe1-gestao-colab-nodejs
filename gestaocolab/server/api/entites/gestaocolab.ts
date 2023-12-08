@@ -4,5 +4,4 @@ export interface Gestaocolab{
     sobrenome: string
     cpf: string
     cargo: string
-    dataNasc: Date
 }

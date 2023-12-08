@@ -13,10 +13,36 @@ tags:
 paths:
   /gestaocolab:
     get:
+      summary: Retrieve all gestaocolab
       responses:
-        200:
-          description: Return all
-          content:{}
+        '200':
+          description: Successful operation
+          content: {}
+    post:
+      summary: Create a new gestaocolab
+      responses:
+        '200':
+          description: Successful operation
+          content: {}
+  /gestaocolab/{id}:
+    get:
+      summary: Retrieve a gestaocolab by ID
+      responses:
+        '200':
+          description: Successful operation
+          content: {}
+    put:
+      summary: Update a gestaocolab by ID
+      responses:
+        '200':
+          description: Successful operation
+          content: {}
+    delete:
+      summary: Delete a gestaocolab by ID
+      responses:
+        '200':
+          description: Successful operation
+          content: {}
   /examples:
     get:
       tags:
